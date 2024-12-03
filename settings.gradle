@@ -1,1 +1,3 @@
-rootProject.name = 'resume_analizer'
+rootProject.name = 'resume-analyzer-backend'
+
+includeBuild 'resume-analyzer'
