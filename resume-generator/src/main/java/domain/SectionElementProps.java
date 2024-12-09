@@ -8,6 +8,11 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @author Ildar Khuzin
+ * @version 1.0.0
+ *  Настройки для отображения каждого блока (стили, текстовые данные).
+ */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SectionElementProps {
