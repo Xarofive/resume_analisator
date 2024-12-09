@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import lombok.Data;
 
-@Data
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlockElement {
@@ -54,5 +53,94 @@ public class BlockElement {
         this.props = props;
         this.children = children;
         this.layout = layout;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public Integer getColumns() {
+        return columns;
+    }
+
+    public void setColumns(Integer columns) {
+        this.columns = columns;
+    }
+
+    public SectionElementProps getProps() {
+        return props;
+    }
+
+    public void setProps(SectionElementProps props) {
+        this.props = props;
+    }
+
+    public List<BlockElement> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<BlockElement> children) {
+        this.children = children;
+    }
+
+    public Layout getLayout() {
+        return layout;
+    }
+
+    public void setLayout(Layout layout) {
+        this.layout = layout;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BlockElement that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(),
+                that.getName()) && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getType(),
+                that.getType()) && Objects.equals(getSource(), that.getSource()) && Objects.equals(getColumns(),
+                that.getColumns()) && Objects.equals(getProps(), that.getProps()) && Objects.equals(getChildren(),
+                that.getChildren()) && Objects.equals(getLayout(), that.getLayout());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getTitle(), getType(), getSource(), getColumns(), getProps(),
+                getChildren(), getLayout());
     }
 }

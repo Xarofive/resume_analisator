@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import java.util.Objects;
 import java.util.UUID;
-import lombok.Data;
 
-@Data
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SectionElementProps {
@@ -49,5 +48,86 @@ public class SectionElementProps {
         this.inputStyle = inputStyle;
         this.url = url;
         this.style = style;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getWrapperStyle() {
+        return wrapperStyle;
+    }
+
+    public void setWrapperStyle(String wrapperStyle) {
+        this.wrapperStyle = wrapperStyle;
+    }
+
+    public String getTextStyle() {
+        return textStyle;
+    }
+
+    public void setTextStyle(String textStyle) {
+        this.textStyle = textStyle;
+    }
+
+    public String getInputStyle() {
+        return inputStyle;
+    }
+
+    public void setInputStyle(String inputStyle) {
+        this.inputStyle = inputStyle;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SectionElementProps that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getKey(), that.getKey()) &&
+                Objects.equals(getText(), that.getText()) && Objects.equals(getWrapperStyle(),
+                that.getWrapperStyle()) && Objects.equals(getTextStyle(), that.getTextStyle()) &&
+                Objects.equals(getInputStyle(), that.getInputStyle()) && Objects.equals(getUrl(),
+                that.getUrl()) && Objects.equals(getStyle(), that.getStyle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getKey(), getText(), getWrapperStyle(), getTextStyle(), getInputStyle(),
+                getUrl(), getStyle());
     }
 }
