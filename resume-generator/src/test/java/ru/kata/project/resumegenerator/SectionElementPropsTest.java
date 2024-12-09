@@ -3,14 +3,17 @@ package ru.kata.project.resumegenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import domain.SectionElementProps;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("тест для проверки класса SectionElementProps")
 public class SectionElementPropsTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
+    @DisplayName("проверка на сериализацию/десериализацию")
     void testSectionElementPropsSerializationAndDeserialization() throws JsonProcessingException {
         SectionElementProps props = createSampleSectionElementProps();
         String jsonString = objectMapper.writeValueAsString(props);
@@ -25,6 +28,7 @@ public class SectionElementPropsTest {
     }
 
     @Test
+    @DisplayName("проверка на нулевое значение")
     void testSectionElementPropsSerializationAndDeserialization_NullValues() throws JsonProcessingException {
         SectionElementProps props = new SectionElementProps(); // Используем конструктор по умолчанию
         String jsonString = objectMapper.writeValueAsString(props);
@@ -40,8 +44,10 @@ public class SectionElementPropsTest {
     }
 
     @Test
+    @DisplayName("проверка на пустую строку")
     void testSectionElementPropsSerializationAndDeserialization_EmptyStrings() throws JsonProcessingException {
-        SectionElementProps props = new SectionElementProps(UUID.randomUUID(), "", "", "", "", "", "", "");
+        SectionElementProps props = new SectionElementProps(UUID.randomUUID(), "", "", "",
+                "", "", "", "");
         String jsonString = objectMapper.writeValueAsString(props);
         SectionElementProps deserializedProps = objectMapper.readValue(jsonString, SectionElementProps.class);
         assertEquals("", deserializedProps.getKey());
@@ -54,6 +60,7 @@ public class SectionElementPropsTest {
     }
 
     private SectionElementProps createSampleSectionElementProps() {
-        return new SectionElementProps(UUID.randomUUID(), "myKey", "My Text", "wrapperStyle", "textStyle", "inputStyle", "http://example.com", "style");
+        return new SectionElementProps(UUID.randomUUID(), "myKey", "My Text", "wrapperStyle",
+                "textStyle", "inputStyle", "http://example.com", "style");
     }
 }

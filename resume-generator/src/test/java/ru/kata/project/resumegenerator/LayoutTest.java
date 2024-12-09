@@ -4,17 +4,19 @@ package ru.kata.project.resumegenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import domain.Layout;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("тест для проверки класса Layout")
 public class LayoutTest {
-
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
+    @DisplayName("проверка на сериализацию/десериализацию")
     void testLayoutSerializationAndDeserialization() throws JsonProcessingException {
         Layout layout = createSampleLayout();
         String jsonString = objectMapper.writeValueAsString(layout);
@@ -34,11 +36,10 @@ public class LayoutTest {
         assertEquals(layout.getResizable(), deserializedLayout.getResizable());
         assertEquals(layout.getResizeHandles(), deserializedLayout.getResizeHandles());
         assertEquals(layout.getBounded(), deserializedLayout.getBounded());
-
     }
 
-
     @Test
+    @DisplayName("проверка на нулевое значение")
     void testLayoutSerializationAndDeserialization_NullValues() throws JsonProcessingException {
         Layout layout = new Layout(); // используем конструктор по умолчанию для null значений
         String jsonString = objectMapper.writeValueAsString(layout);

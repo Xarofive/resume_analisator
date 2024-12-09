@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import domain.BlockElement;
 import domain.Layout;
 import domain.SectionElementProps;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +13,14 @@ import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("тест для проверки класса BlockElement")
+
 public class BlockElementTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
+    @DisplayName("проверка на сериализацию/десериализацию")
     void testBlockElementSerializationAndDeserialization() throws JsonProcessingException {
         BlockElement block = createSampleBlockElement();
         String jsonString = objectMapper.writeValueAsString(block);
@@ -37,6 +41,7 @@ public class BlockElementTest {
     }
 
     @Test
+    @DisplayName("проверка на нулевое значение")
     void testBlockElementSerializationAndDeserialization_NullValues() throws JsonProcessingException {
         BlockElement block = new BlockElement();
         String jsonString = objectMapper.writeValueAsString(block);
