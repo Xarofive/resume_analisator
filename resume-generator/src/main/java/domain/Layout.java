@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @author Ildar Khuzin
+ * @version 1.0.0
+ * Данные для позиционирования блоков на странице.
+ */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Layout {

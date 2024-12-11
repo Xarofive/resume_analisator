@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @author Ildar Khuzin
+ * @version 1.0.0
+ * Основной класс, который описывает блоки в резюме.
+ */
+@SuppressWarnings("checkstyle:SummaryJavadoc")
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlockElement {
