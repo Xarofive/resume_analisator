@@ -137,16 +137,11 @@ public class BlockElement {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BlockElement that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(),
-                that.getName()) && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getType(),
-                that.getType()) && Objects.equals(getSource(), that.getSource()) && Objects.equals(getColumns(),
-                that.getColumns()) && Objects.equals(getProps(), that.getProps()) && Objects.equals(getChildren(),
-                that.getChildren()) && Objects.equals(getLayout(), that.getLayout());
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getTitle(), getType(), getSource(), getColumns(), getProps(),
-                getChildren(), getLayout());
+        return Objects.hash(getId());
     }
 }

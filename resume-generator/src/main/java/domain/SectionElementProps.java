@@ -123,16 +123,11 @@ public class SectionElementProps {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SectionElementProps that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getKey(), that.getKey()) &&
-                Objects.equals(getText(), that.getText()) && Objects.equals(getWrapperStyle(),
-                that.getWrapperStyle()) && Objects.equals(getTextStyle(), that.getTextStyle()) &&
-                Objects.equals(getInputStyle(), that.getInputStyle()) && Objects.equals(getUrl(),
-                that.getUrl()) && Objects.equals(getStyle(), that.getStyle());
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getKey(), getText(), getWrapperStyle(), getTextStyle(), getInputStyle(),
-                getUrl(), getStyle());
+        return Objects.hash(getId());
     }
 }
