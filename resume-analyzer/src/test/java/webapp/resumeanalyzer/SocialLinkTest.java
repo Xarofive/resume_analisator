@@ -16,30 +16,30 @@ import webapp.resumeanalyzer.domain.SocialLink;
 @DisplayName("Тест проверки сущности SocialLink")
 public class SocialLinkTest {
 
-  private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-  @Test
-  @DisplayName("сравнение после сериализации и десериализации")
-  void testSocialLinkSerializationAndDeserializationEquals() throws JsonProcessingException {
-    SocialLink socialLink = createSampleSocialLink();
-    String jsonString = objectMapper.writeValueAsString(socialLink);
-    SocialLink deserializedSocialLink = objectMapper.readValue(jsonString, SocialLink.class);
-    assertEquals(socialLink.getLink(), deserializedSocialLink.getLink());
-    assertEquals(socialLink.getName(), deserializedSocialLink.getName());
-  }
+    @Test
+    @DisplayName("сравнение после сериализации и десериализации")
+    void testSocialLinkSerializationAndDeserializationEquals() throws JsonProcessingException {
+        SocialLink socialLink = createSampleSocialLink();
+        String jsonString = objectMapper.writeValueAsString(socialLink);
+        SocialLink deserializedSocialLink = objectMapper.readValue(jsonString, SocialLink.class);
+        assertEquals(socialLink.getLink(), deserializedSocialLink.getLink());
+        assertEquals(socialLink.getName(), deserializedSocialLink.getName());
+    }
 
-  @Test
-  @DisplayName("сравнение с NULL")
-  void testSocialLinkSerializationAndDeserializationNullValues() throws JsonProcessingException {
-    SocialLink socialLink = new SocialLink();
-    String jsonString = objectMapper.writeValueAsString(socialLink);
-    SocialLink deserializedSocialLink = objectMapper.readValue(jsonString, SocialLink.class);
-    assertNull(deserializedSocialLink.getId());
-    assertNull(deserializedSocialLink.getLink());
-    assertNull(deserializedSocialLink.getName());
-  }
+    @Test
+    @DisplayName("сравнение с NULL")
+    void testSocialLinkSerializationAndDeserializationNullValues() throws JsonProcessingException {
+        SocialLink socialLink = new SocialLink();
+        String jsonString = objectMapper.writeValueAsString(socialLink);
+        SocialLink deserializedSocialLink = objectMapper.readValue(jsonString, SocialLink.class);
+        assertNull(deserializedSocialLink.getId());
+        assertNull(deserializedSocialLink.getLink());
+        assertNull(deserializedSocialLink.getName());
+    }
 
-  private SocialLink createSampleSocialLink() {
-    return new SocialLink(UUID.randomUUID(), "X", "Y");
-  }
+    private SocialLink createSampleSocialLink() {
+        return new SocialLink(UUID.randomUUID(), "X", "Y");
+    }
 }

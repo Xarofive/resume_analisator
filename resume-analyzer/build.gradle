@@ -55,14 +55,14 @@ tasks.named('test') {
 
 checkstyle {
     toolVersion '10.20.2'
-    configFile file("\\src\\main\\java\\webapp\\resumeanalyzer\\config\\checkstyle\\checkstyle.xml ")
+    configFile file("\\src\\main\\java\\webapp\\resumeanalyzer\\config\\checkstyle\\checkstyle.xml")
     ignoreFailures = true
     maxWarnings = 0
     maxErrors = 0
 }
 checkstyleMain {
-    source ='src/main/java'
+    source = 'src/main/java'
 }
 checkstyleTest {
-    source ='src/test/java'
+    source = 'src/test/java'
 }

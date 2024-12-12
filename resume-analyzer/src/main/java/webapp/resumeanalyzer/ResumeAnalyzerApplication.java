@@ -11,11 +11,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class ResumeAnalyzerApplication {
 
-  /**
-   * main метод.
-   */
-  public static void main(String[] args) {
-    SpringApplication.run(ResumeAnalyzerApplication.class, args);
-  }
+    /**
+     * main метод.
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(ResumeAnalyzerApplication.class, args);
+    }
 
 }

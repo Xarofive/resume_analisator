@@ -16,28 +16,28 @@ import webapp.resumeanalyzer.domain.Hobby;
 @DisplayName("Тест проверки сущности Hobby")
 public class HobbyTest {
 
-  private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-  @Test
-  @DisplayName("сравнение после сериализации и десериализации")
-  void testHobbySerializationAndDeserializationEquals() throws JsonProcessingException {
-    Hobby hobby = createSampleHobby();
-    String jsonString = objectMapper.writeValueAsString(hobby);
-    Hobby deserializedHobby = objectMapper.readValue(jsonString, Hobby.class);
-    assertEquals(hobby.getHobby(), deserializedHobby.getHobby());
-  }
+    @Test
+    @DisplayName("сравнение после сериализации и десериализации")
+    void testHobbySerializationAndDeserializationEquals() throws JsonProcessingException {
+        Hobby hobby = createSampleHobby();
+        String jsonString = objectMapper.writeValueAsString(hobby);
+        Hobby deserializedHobby = objectMapper.readValue(jsonString, Hobby.class);
+        assertEquals(hobby.getHobby(), deserializedHobby.getHobby());
+    }
 
-  @Test
-  @DisplayName("сравнение с NULL")
-  void testHobbySerializationAndDeserializationNullValues() throws JsonProcessingException {
-    Hobby hobby = new Hobby();
-    String jsonString = objectMapper.writeValueAsString(hobby);
-    Hobby deserializedHobby = objectMapper.readValue(jsonString, Hobby.class);
-    assertNull(deserializedHobby.getId());
-    assertNull(deserializedHobby.getHobby());
-  }
+    @Test
+    @DisplayName("сравнение с NULL")
+    void testHobbySerializationAndDeserializationNullValues() throws JsonProcessingException {
+        Hobby hobby = new Hobby();
+        String jsonString = objectMapper.writeValueAsString(hobby);
+        Hobby deserializedHobby = objectMapper.readValue(jsonString, Hobby.class);
+        assertNull(deserializedHobby.getId());
+        assertNull(deserializedHobby.getHobby());
+    }
 
-  private Hobby createSampleHobby() {
-    return new Hobby(UUID.randomUUID(), "X");
-  }
+    private Hobby createSampleHobby() {
+        return new Hobby(UUID.randomUUID(), "X");
+    }
 }
