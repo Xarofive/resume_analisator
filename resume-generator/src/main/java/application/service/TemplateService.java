@@ -11,14 +11,14 @@ import java.util.List;
  */
 
 public interface TemplateService {
-  /**
+    /**
    * Получение списка всех шаблонов.
    *
    * @return Список шаблонов
    **/
-  public List<Template> getAllTemplates();
+    public List<Template> getAllTemplates();
 
-  /**
+    /**
    * Получение шаблона по id.
    *
    * @param id Идентификатор шаблона.
@@ -26,17 +26,17 @@ public interface TemplateService {
    * @throws RuntimeException Исключение, возникающее при условии что шаблон не найден.
    */
 
-  public Template getTemplateById(String id);
+    public Template getTemplateById(String id);
 
-  /*** Создание нового шаблона.
+    /*** Создание нового шаблона.
    *
    * @param template Объект шаблона, который будет сохранен.
    * @return Сохраненный шаблон.
    */
 
-  public Template createTemplate(Template template);
+    public Template createTemplate(Template template);
 
-  /**
+    /**
    * Обновление сущетсвующего шаблона.
    *
    * @param id       Уникальный идентификатор шаблона, который требуется обновить.
@@ -44,30 +44,30 @@ public interface TemplateService {
    * @return Обновленный шаблон.
    * @throws RuntimeException Исключение, возникающее если шаблон не найден.
    */
-  public Template updateTemplate(String id, Template template);
+    public Template updateTemplate(String id, Template template);
 
-  /**
+    /**
    * Удаление шаблона.
    *
    * @param id Уникальный идентификатор шаблона.
    * @throws RuntimeException Исключение, возникающее если шаблон не найден.
    */
-  public void deleteTemplate(String id);
+    public void deleteTemplate(String id);
 
-  /**
+    /**
    * Список шаблонов, дата которых находится в указанном диапазоне дат.
    *
    * @param startDate Начальная дата диапазона.
    * @param endDate   Конечная дата диапазона.
    * @return Список шаблонов, входящих в указанный диапазон дат.
    */
-  public List<Template> getTemplatesByDateRange(LocalDate startDate, LocalDate endDate);
+    public List<Template> getTemplatesByDateRange(LocalDate startDate, LocalDate endDate);
 
-  /**
+    /**
    * Проверяет, существует ли шаблон с указанным именем.
    *
    * @param name Имя шаблона.
    * @return Возвращает {@code true}, если шаблон с таким именем существует, иначе {@code false}.
    */
-  public boolean isTemplateNameExist(String name);
+    public boolean isTemplateNameExist(String name);
 }

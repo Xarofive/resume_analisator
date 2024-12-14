@@ -15,30 +15,30 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TemplateServiceImpl implements TemplateService {
-  private final TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
 
-  /**
+    /**
    * Конструктор для внедрения зависимости репозитория.
    *
    * @param templateRepository Репозиторий для работы с шаблонами.
    */
-  @Autowired
-  public TemplateServiceImpl(TemplateRepository templateRepository) {
-    this.templateRepository = templateRepository;
-  }
+    @Autowired
+    public TemplateServiceImpl(TemplateRepository templateRepository) {
+        this.templateRepository = templateRepository;
+    }
 
-  /**
+    /**
    * Получение списка всех шаблонов.
    *
    * @return Список всех шаблонов
    */
 
-  @Override
-  public List<Template> getAllTemplates() {
-    return templateRepository.findAll();
-  }
+    @Override
+    public List<Template> getAllTemplates() {
+        return templateRepository.findAll();
+    }
 
-  /**
+    /**
    * Получение шаблона по уникальному идентификатору.
    * Если шаблон не найден, выбрасывается исключение.
    *
@@ -47,26 +47,26 @@ public class TemplateServiceImpl implements TemplateService {
    * @throws RuntimeException возникает исключение, если шаблон не найден.
    */
 
-  @Override
-  public Template getTemplateById(String id) {
-    UUID uuid = UUID.fromString(id);
-    return templateRepository.findById(uuid)
-      .orElseThrow(() -> new RuntimeException("Шаблон не найден"));
-  }
+    @Override
+    public Template getTemplateById(String id) {
+        UUID uuid = UUID.fromString(id);
+        return templateRepository.findById(uuid)
+          .orElseThrow(() -> new RuntimeException("Шаблон не найден"));
+    }
 
-  /**
+    /**
    * Создание нового шаблона.
    *
    * @param template Объект шаблона, который будет сохранен.
    * @return Сохраненный шаблон.
    */
 
-  @Override
-  public Template createTemplate(Template template) {
-    return templateRepository.save(template);
-  }
+    @Override
+    public Template createTemplate(Template template) {
+        return templateRepository.save(template);
+    }
 
-  /**
+    /**
    * Обновление существующего шаблона.
    *
    * @param id     Уникальный идентификатор шаблона, который требуется обновить.
@@ -75,33 +75,33 @@ public class TemplateServiceImpl implements TemplateService {
    * @throws RuntimeException возникает исключение, если шаблон не нацден.
    */
 
-  @Override
-  public Template updateTemplate(String id, Template template) {
-    UUID uuid = UUID.fromString(id);
-    if (!templateRepository.existsById(uuid)) {
-      throw new RuntimeException();
+    @Override
+    public Template updateTemplate(String id, Template template) {
+        UUID uuid = UUID.fromString(id);
+        if (!templateRepository.existsById(uuid)) {
+            throw new RuntimeException();
+        }
+        template.setId(uuid);
+        return templateRepository.save(template);
     }
-    template.setId(uuid);
-    return templateRepository.save(template);
-  }
 
-  /**
+    /**
    * Удаление шаблона.
    *
    * @param id Уникальный идентификатор шаблона.
    * @throws RuntimeException возникает исключение, если шаблон не найден.
    */
 
-  @Override
-  public void deleteTemplate(String id) {
-    UUID uuid = UUID.fromString(id);
-    if (!templateRepository.existsById(uuid)) {
-      throw new RuntimeException();
+    @Override
+    public void deleteTemplate(String id) {
+        UUID uuid = UUID.fromString(id);
+        if (!templateRepository.existsById(uuid)) {
+            throw new RuntimeException();
+        }
+        templateRepository.deleteById(uuid);
     }
-    templateRepository.deleteById(uuid);
-  }
 
-  /**
+    /**
    * Список шаблонов, дата которых находится в указанном диапазоне.
    *
    * @param startDate Начальная дата диапазона.
@@ -109,21 +109,21 @@ public class TemplateServiceImpl implements TemplateService {
    * @return Список шаблонов, входящих в указанный диапазон дат.
    */
 
-  @Override
-  public List<Template> getTemplatesByDateRange(LocalDate startDate,
+    @Override
+    public List<Template> getTemplatesByDateRange(LocalDate startDate,
                                                 LocalDate endDate) {
-    return templateRepository.findByDate(startDate, endDate);
-  }
+        return templateRepository.findByDate(startDate, endDate);
+    }
 
-  /**
+    /**
    * Проверяет, существует ли шаблон с указанным именем.
    *
    * @param name Имя шаблона.
    * @return Возвращает {@code true}, если шаблон с таким именем существует, иначе {@code false}.
    */
 
-  @Override
-  public boolean isTemplateNameExist(String name) {
-    return !templateRepository.findByName(name).isEmpty();
-  }
+    @Override
+    public boolean isTemplateNameExist(String name) {
+        return !templateRepository.findByName(name).isEmpty();
+    }
 }

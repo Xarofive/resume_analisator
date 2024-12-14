@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface CustomTemplateRepository {
-  List<Template> findByName(String name);
+    List<Template> findByName(String name);
 
-  List<Template> findByDate(LocalDate startDate, LocalDate endDate);
+    List<Template> findByDate(LocalDate startDate, LocalDate endDate);
 }

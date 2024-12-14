@@ -9,8 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan(basePackages = {"ru.kata.project.resumegenerator", "infrastructure.controller", "application"})
 @EnableMongoRepositories(basePackages = "infrastructure.repository")
 public class ResumeGeneratorApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ResumeGeneratorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ResumeGeneratorApplication.class, args);
+    }
 }
