@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * REST-контроллер для управления шаблонами резюме.
  * Обрабатывает HTTP-запросы, связанные с операциями CRUD для сущности {@link Template}.
@@ -27,28 +26,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/templates")
 public class TemplateController {
     /**
-   * Сервис для выполнения бизнес логики.
-   */
-    private final
-            TemplateService templateService;
+     * Сервис для выполнения бизнес логики.
+     */
+    private final TemplateService templateService;
 
     /**
-   * Конструктор для внедрения зависимсоти TemplateService.
-   *
-   * @param templateService сервис для управления шаблонами.
-   */
-
+     * Конструктор для внедрения зависимсоти TemplateService.
+     *
+     * @param templateService сервис для управления шаблонами.
+     */
     @Autowired
     public TemplateController(TemplateService templateService) {
         this.templateService = templateService;
     }
 
     /**
-   * Получение списка всех шаблонов.
-   *
-   * @return {@link ResponseEntity} с HTTP статусом 200 (OK) и списком шаблонов. Если шаблонов нет, возвращает пустой список.
-   */
-
+     * Получение списка всех шаблонов.
+     *
+     * @return {@link ResponseEntity} с HTTP статусом 200 (OK) и списком шаблонов. Если шаблонов нет, возвращает пустой список.
+     */
     @GetMapping
     public ResponseEntity<List<Template>> getTemplates() {
         List<Template> templates = templateService.getAllTemplates();
@@ -57,13 +53,13 @@ public class TemplateController {
         }
         return ResponseEntity.ok(templates);
     }
-    /**
-   * Метод для получения шаблона по его уникальному идентификатору.
-   *
-   * @param id Уникальный идентификатор.
-   * @return {@link ResponseEntity} с HTTP статусом 200 (OK) и шаблоном, или 404 (Not Found), если шаблон не найден
-   */
 
+    /**
+     * Метод для получения шаблона по его уникальному идентификатору.
+     *
+     * @param id Уникальный идентификатор.
+     * @return {@link ResponseEntity} с HTTP статусом 200 (OK) и шаблоном, или 404 (Not Found), если шаблон не найден
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Template> getTemplateById(@PathVariable String id) {
         Template template = templateService.getTemplateById(id);
@@ -74,12 +70,11 @@ public class TemplateController {
     }
 
     /**
-   * Метод для создания нового шаблона.
-   *
-   * @param template объект {@link Template}, содержащий данные для создания.
-   * @return {@link ResponseEntity} с HTTP статусом 201 (Created) и созданным шаблоном.
-   */
-
+     * Метод для создания нового шаблона.
+     *
+     * @param template объект {@link Template}, содержащий данные для создания.
+     * @return {@link ResponseEntity} с HTTP статусом 201 (Created) и созданным шаблоном.
+     */
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Template> createTemplate(@RequestBody Template template) {
         Template savedTemplate = templateService.createTemplate(template);
@@ -87,11 +82,11 @@ public class TemplateController {
     }
 
     /**
-   * Метод для удаления шаблона по его уникальному идентификатору.
-   *
-   * @param id Уникальный идентификатор шаблона.
-   * @return {@link ResponseEntity} с HTTP статусом 204 (No Content), если удаление успешно.
-   */
+     * Метод для удаления шаблона по его уникальному идентификатору.
+     *
+     * @param id Уникальный идентификатор шаблона.
+     * @return {@link ResponseEntity} с HTTP статусом 204 (No Content), если удаление успешно.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Template> deleteTemplate(@PathVariable String id) {
         templateService.deleteTemplate(id);
@@ -99,13 +94,12 @@ public class TemplateController {
     }
 
     /**
-   * Обновляет существующий шаблон.
-   *
-   * @param id Уникальный идентификатор, обновленного шаблона.
-   * @param template Обновленный шаблон.
-   * @return Обновленный шаблон.
-   */
-
+     * Обновляет существующий шаблон.
+     *
+     * @param id Уникальный идентификатор, обновленного шаблона.
+     * @param template Обновленный шаблон.
+     * @return Обновленный шаблон.
+     */
     @PutMapping
     public ResponseEntity<Template> updateTemplate(@PathVariable String id,
                                                    @RequestBody Template template) {
@@ -118,13 +112,12 @@ public class TemplateController {
     }
 
     /**
-   * Извлекает шаблоны, за указанный период.
-   *
-   * @param startDate Начальная дата диапазона.
-   * @param endDate Конечная дата диапазона.
-   * @return Список шаблонов за указанный период.
-   */
-
+     * Извлекает шаблоны, за указанный период.
+     *
+     * @param startDate Начальная дата диапазона.
+     * @param endDate Конечная дата диапазона.
+     * @return Список шаблонов за указанный период.
+     */
     @GetMapping("/data")
     public List<Template> getTemplateData(@RequestParam String startDate,
                                         @RequestParam String endDate) {
@@ -134,11 +127,11 @@ public class TemplateController {
     }
 
     /**
-   * Проверка существует ли шаблон с данным именем.
-   *
-   * @param name Имя шаблона.
-   * @return Статус 200, если существует, 404 если нет.
-   */
+     * Проверка существует ли шаблон с данным именем.
+     *
+     * @param name Имя шаблона.
+     * @return Статус 200, если существует, 404 если нет.
+     */
     @GetMapping("/exists")
     public ResponseEntity<Boolean> existsTemplateName(@RequestParam String name) {
         boolean exists = templateService.isTemplateNameExist(name);
