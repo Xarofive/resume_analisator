@@ -1,6 +1,6 @@
-package application.service;
+package webapp.resumegenerator.application.service;
 
-import domain.model.Template;
+import webapp.resumegenerator.domain.model.Template;
 import java.time.LocalDate;
 import java.util.List;
 

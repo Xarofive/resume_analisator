@@ -1,6 +1,6 @@
-package infrastructure.repository;
+package webapp.resumegenerator.infrastructure.repository;
 
-import domain.model.Template;
+import webapp.resumegenerator.domain.model.Template;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
