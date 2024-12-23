@@ -3,7 +3,7 @@ package ru.kata.project.resumegenerator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import webapp.resumegenerator.domain.Layout;
+import webapp.resumegenerator.domain.model.Layout;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -31,11 +31,11 @@ public class LayoutTest {
         assertEquals(layout.getMinH(), deserializedLayout.getMinH());
         assertEquals(layout.getMaxH(), deserializedLayout.getMaxH());
         assertEquals(layout.getMoved(), deserializedLayout.getMoved());
-        assertEquals(layout.getStatic(), deserializedLayout.getStatic());
-        assertEquals(layout.getDraggable(), deserializedLayout.getDraggable());
-        assertEquals(layout.getResizable(), deserializedLayout.getResizable());
+        assertEquals(layout.getIsStatic(), deserializedLayout.getIsStatic());
+        assertEquals(layout.getIsDraggable(), deserializedLayout.getIsDraggable());
+        assertEquals(layout.getIsResizable(), deserializedLayout.getIsResizable());
         assertEquals(layout.getResizeHandles(), deserializedLayout.getResizeHandles());
-        assertEquals(layout.getBounded(), deserializedLayout.getBounded());
+        assertEquals(layout.getIsBounded(), deserializedLayout.getIsBounded());
     }
 
     @Test
@@ -55,11 +55,11 @@ public class LayoutTest {
         assertNull(deserializedLayout.getMinH());
         assertNull(deserializedLayout.getMaxH());
         assertNull(deserializedLayout.getMoved());
-        assertNull(deserializedLayout.getStatic());
-        assertNull(deserializedLayout.getDraggable());
-        assertNull(deserializedLayout.getResizable());
+        assertNull(deserializedLayout.getIsStatic());
+        assertNull(deserializedLayout.getIsDraggable());
+        assertNull(deserializedLayout.getIsResizable());
         assertNull(deserializedLayout.getResizeHandles());
-        assertNull(deserializedLayout.getBounded());
+        assertNull(deserializedLayout.getIsBounded());
     }
 
     private Layout createSampleLayout() {
