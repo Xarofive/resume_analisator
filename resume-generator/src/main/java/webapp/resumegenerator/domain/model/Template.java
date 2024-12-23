@@ -64,6 +64,14 @@ public class Template {
     private LocalDateTime createdAt;
 
     /**
+     * Версия шаблона.
+     * Устанавливается автоматически в момент создания шаблона.
+     */
+    @NotBlank()
+    private Integer version;
+
+
+    /**
      * Конструктор с параметрами для создания шаблона.
      *
      * @param name Название шаблона.
@@ -76,6 +84,7 @@ public class Template {
         this.name = name;
         this.description = description;
         this.content = content;
+        this.version = 1;
     }
 
     @Override

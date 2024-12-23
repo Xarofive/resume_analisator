@@ -1,4 +1,4 @@
-package webapp.resumegenerator.application.service;
+package webapp.resumegenerator.domain.service;
 
 import webapp.resumegenerator.domain.model.Template;
 import java.time.LocalDate;
@@ -66,4 +66,21 @@ public interface TemplateService {
      * @return Возвращает {@code true}, если шаблон с таким именем существует, иначе {@code false}.
      */
     boolean isTemplateNameExist(String name);
+
+    /**
+     * Находит все версии шаблона по имени.
+     *
+     * @param name Имя шаблона.
+     * @return Возвращает список всех существующих версий шаблона.
+     */
+    List<Template> findAllTemplateVersionsByName(String name);
+
+    /**
+     * Создает новую версию шаблона на основе существующего.
+     *
+     * @param template Шаблон, новую версию которого нужно создать.
+     * @return Возвращает новую версию шаблона.
+     */
+    Template createNewTemplateVersion(Template template);
+
 }

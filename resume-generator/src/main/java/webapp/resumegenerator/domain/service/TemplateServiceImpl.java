@@ -1,7 +1,7 @@
-package webapp.resumegenerator.application.service;
+package webapp.resumegenerator.domain.service;
 
 import webapp.resumegenerator.domain.model.Template;
-import webapp.resumegenerator.infrastructure.repository.TemplateRepository;
+import webapp.resumegenerator.domain.repository.TemplateRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -127,4 +127,31 @@ public class TemplateServiceImpl implements TemplateService {
     public boolean isTemplateNameExist(String name) {
         return !templateRepository.findByName(name).isEmpty();
     }
+
+    /**
+     * Находит все версии шаблона по имени.
+     *
+     * @param name Имя шаблона.
+     * @return Возвращает список всех существующих версий шаблона.
+     */
+    @Override
+    public List<Template> findAllTemplateVersionsByName(String name) {
+        return templateRepository.findByNameOrderByVersionDesc(name);
+    }
+
+    /**
+     * Создает новую версию шаблона на основе существующего.
+     *
+     * @param template Шаблон, новую версию которого нужно создать.
+     * @return Возвращает новую версию шаблона.
+     */
+    @Override
+    public Template createNewTemplateVersion(Template template) {
+        Template newTemplate = new Template(template.getName(), template.getContent(),
+                template.getDescription());
+        newTemplate.setVersion(template.getVersion() + 1);
+        return newTemplate;
+    }
+
+
 }

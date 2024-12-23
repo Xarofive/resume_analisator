@@ -4,13 +4,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import webapp.resumegenerator.application.service.TemplateService;
+import webapp.resumegenerator.domain.service.TemplateService;
 import webapp.resumegenerator.domain.model.Template;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import webapp.resumegenerator.ResumeGeneratorApplication;
-import webapp.resumegenerator.infrastructure.controller.TemplateController;
+import webapp.resumegenerator.domain.controller.TemplateController;
 
 /**
  * Тестовый класс для проверки функциональности {@link TemplateController}.
@@ -141,4 +140,50 @@ public class TemplateControllerTest {
         mockMvc.perform(delete("/templates/{id}", UUID.randomUUID()))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    @DisplayName("Проверка что при создании новой версии шаблона создается такой же шаблон с версией, увеличенной на 1")
+    public void testCreateNewTemplateVersion() throws Exception {
+        UUID generatedId = UUID.randomUUID();
+        Template template = new Template("Template1", "Description1", "Content1");
+        template.setId(generatedId);
+        Template newVersion = new Template("Template1", "Description1", "Content1");
+        newVersion.setVersion(template.getVersion() + 1);
+        newVersion.setId(UUID.randomUUID());
+        when(templateService.getTemplateById(generatedId.toString())).thenReturn(template);
+        when(templateService.createNewTemplateVersion(template)).thenReturn(newVersion);
+        mockMvc.perform(MockMvcRequestBuilders.post("/templates/{id}/version", generatedId).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"Template1\",\"description\":\"Description1\",\"content\":\"Content1\", \"version\":\"2\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name").value("Template1"))
+                .andExpect(jsonPath("$.description").value("Description1"))
+                .andExpect(jsonPath("$.content").value("Content1"))
+                .andExpect(jsonPath("$.version").value(2))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    @DisplayName("Проверка, что при поиске всех версий шаблона возвращается список всех версий в порядке убывания")
+    public void testGetAllTemplateVersions() throws Exception {
+        UUID generatedId = UUID.randomUUID();
+        Template template1 = new Template("Template1", "Description1", "Content1");
+        Template template2 = new Template("Template1", "Description1", "Content1");
+        Template template3 = new Template("Template1", "Description1", "Content1");
+        template2.setVersion(2);
+        template3.setVersion(3);
+        List<Template> templates = List.of(template3, template2, template1);
+        when(templateService.getTemplateById(generatedId.toString())).thenReturn(template1);
+        when(templateService.findAllTemplateVersionsByName("Template1")).thenReturn(templates);
+        mockMvc.perform(get("/templates/{id}/versions", generatedId.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("Template1"))
+                .andExpect(jsonPath("$[1].name").value("Template1"))
+                .andExpect(jsonPath("$[2].name").value("Template1"))
+                .andExpect(jsonPath("$[0].version").value(3))
+                .andExpect(jsonPath("$[1].version").value(2))
+                .andExpect(jsonPath("$[2].version").value(1))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+
 }
